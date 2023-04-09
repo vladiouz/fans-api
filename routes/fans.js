@@ -12,6 +12,15 @@ router.get("/all", async (req, res) => {
   }
 });
 
+router.get("/count", async (req, res) => {
+  try {
+    const fans = await Fan.find();
+    res.status(200).json({ count: fans.length });
+  } catch (err) {
+    res.status(500).json({ message: err });
+  }
+});
+
 router.get("/:id", async (req, res) => {
   try {
     const fan = await Fan.findById(req.params.id);
